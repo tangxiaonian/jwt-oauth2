@@ -7,9 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="user-provider" />
+        <module name="test-provider" />
         <module name="auth-center" />
         <module name="order-provider" />
+        <module name="user-provider" />
+        <module name="app-gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -18,9 +20,11 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="app-gateway" options="-parameters" />
       <module name="auth-center" options="-parameters" />
       <module name="jwt-oauth2" options="-parameters" />
       <module name="order-provider" options="-parameters" />
+      <module name="test-provider" options="-parameters" />
       <module name="user-consumer" options="-parameters" />
       <module name="user-provider" options="-parameters" />
     </option>

@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: app-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: order-provider
+          uri: lb://order-provider
+          predicates:
+            - Path=/api/order/**
+          filters:
+            - StripPrefix=1
+
+        - id: user-provider
+          uri: lb://user-provider
+          predicates:
+            - Path=/api/user/**
+          filters:
+            - StripPrefix=1
+
+        - id: test-provider
+          uri: lb://test-provider
+          predicates:
+            - Method=GET,POST
+            - Path=/api/test/**
+          filters:
+            - StripPrefix=1
+
+        - id: auth-center
+          uri: lb://auth-center
+          predicates:
+            - Path=/api/auth/**
+            - Method=GET,POST
+          filters:
+            - StripPrefix=1
+server:
+  port: 8888
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    org.springframework.cloud.gateway: debug

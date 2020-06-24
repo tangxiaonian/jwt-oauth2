@@ -11,6 +11,8 @@ public class TestMain {
 
         System.out.println(passwordEncoder.encode("secret"));
 
+        System.out.println("Bearer eyJh".substring(7));
+
     }
 
 }

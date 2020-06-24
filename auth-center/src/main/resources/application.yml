@@ -17,6 +17,11 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
 
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+
 management:
   endpoints:
     web:

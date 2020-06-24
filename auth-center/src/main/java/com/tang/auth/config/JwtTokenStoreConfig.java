@@ -1,10 +1,12 @@
 package com.tang.auth.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+
+import javax.sql.DataSource;
 
 /**
  * 使用jwt存储token的配置
@@ -12,9 +14,14 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 public class JwtTokenStoreConfig {
 
-    @Bean
-    public TokenStore jwtTokenStore() {
-        return new JwtTokenStore(jwtAccessTokenConverter());
+    /**
+     * jdbc方式存储令牌
+     * @param dataSource
+     * @return
+     */
+    @Bean(name = "jdbcTokenStore")
+    public JdbcTokenStore jdbcTokenStore(@Qualifier("dataSource") DataSource dataSource) {
+        return new JdbcTokenStore(dataSource);
     }
 
     @Bean

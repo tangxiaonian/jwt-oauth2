@@ -10,6 +10,8 @@
         <module>user-consumer</module>
         <module>auth-center</module>
         <module>order-provider</module>
+        <module>app-gateway</module>
+        <module>test-provider</module>
     </modules>
 
     <parent>
